@@ -1240,6 +1240,8 @@ function BlackboxLogViewer() {
 
 	            prefs.set('userSettings', newSettings);
 
+                selectLog(null);
+
 	            // refresh the craft model
 	            if(graph!=null) {
 	                graph.refreshOptions(newSettings);
