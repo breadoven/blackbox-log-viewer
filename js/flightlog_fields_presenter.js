@@ -449,8 +449,16 @@ function FlightLogFieldPresenter() {
             case "homeDistance":
                 return (value / 100).toFixed(2) + " m";
 
-            case 'flightModeFlags':
+            // case 'flightModeFlags':
+            case 'rcModeFlags':
                 return presentFlags(value, FLIGHT_LOG_FLIGHT_MODE_NAME);
+
+            case 'rcModeFlags2':
+            // case 'flightModeFlags2':
+                return presentFlags(value, FLIGHT_LOG_FLIGHT_MODE_NAME_2);
+
+            case 'activeFlightModeFlags':
+                return presentFlags(value, FLIGHT_LOG_ACTIVE_FLIGHT_MODE_NAME);
 
             case 'stateFlags':
                 return presentFlags(value, FLIGHT_LOG_FLIGHT_STATE_NAME);

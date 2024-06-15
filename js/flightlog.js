@@ -11,7 +11,7 @@
  */
 function FlightLog(logData) {
     var
-        ADDITIONAL_COMPUTED_FIELD_COUNT = 9, /** attitude + PID_SUM + PID_ERROR + VELOCITY + WIND_VELOCITY + WIND_HEADING **/
+        ADDITIONAL_COMPUTED_FIELD_COUNT = 10, /** attitude + PID_SUM + PID_ERROR + VELOCITY + WIND_VELOCITY + WIND_HEADING + Home Distance**/
 
         that = this,
         logIndex = false,
@@ -218,7 +218,15 @@ function FlightLog(logData) {
         // Add names of slow fields which we'll merge into the main stream
         if (parser.frameDefs.S) {
             for (i = 0; i < parser.frameDefs.S.name.length; i++) {
-                fieldNames.push(parser.frameDefs.S.name[i]);
+                let name = parser.frameDefs.S.name[i];
+                if (name == 'flightModeFlags') {
+                    name = 'rcModeFlags';
+                } else if (name == 'flightModeFlags2') {
+                    name = 'rcModeFlags2';
+                }
+
+                fieldNames.push(name);
+                // fieldNames.push(parser.frameDefs.S.name[i]);
             }
         }
 

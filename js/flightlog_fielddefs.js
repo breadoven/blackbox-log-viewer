@@ -10,70 +10,25 @@ function makeReadOnly(x) {
         return x;
 }
 
-var FLIGHT_LOG_FLIGHT_MODE_NAME;
+var
+    FlightLogEvent = makeReadOnly({
+            SYNC_BEEP: 0,
 
-function setVersionSpecificFieldDefs(version) {
-    alert(version);
-    if (version >= 8.0) {
-        alert("in v8");
-        FLIGHT_LOG_FLIGHT_MODE_NAME = makeReadOnly([
-            "ARM",
-            "ANGLE",
-            "HORIZON",
-            "ATTIHOLD",
-            "MANUAL",
-            "NAV ALTHOLD",
-            "HEADING HOLD",
-            "NAV POSHOLD",
-            "NAV COURSE HOLD",
-            "NAV CRUISE",
-            "NAV RTH",
-            "NAV WP",
-            "NAV LAUNCH",
-            "SOARING",
-            "FAILSAFE",
-            "AUTOLEVEL",
-            "HEADFREE",
-            "HEAD ADJ",
-            "CAMSTAB",
-            "BEEPER",
-            "SERVO AUTOTRIM",
-            "AUTO TUNE",
-            "OSD OFF",
-            "TELEMETRY",
-            "BLACKBOX",
-            "AIRMODE",
-            "HOME RESET",
-            "GCS NAV",
-            "SURFACE",
-            "FLAPERON",
-            "TURN ASSIST",
-            "MC BRAKING",        // last item recorded by blackbox (32 bit limit)
-            "LIGHTS",
-            "CAMERA 1",
-            "CAMERA 2",
-            "CAMERA 3",
-            "OSD ALT1",
-            "OSD ALT2",
-            "OSD ALT3",
-            "LEDS OFF",
-            "USER 1",
-            "USER 2",
-            "FPV ANGLE MIX", // FPV Angle Mix
-            "LOITER CHANGE", // Loiter direction change
-            "MSP RC OVERRIDE", // MSP RC Override
-            "PREARM",
-            "TURTLE",
-            "WP PLANNER",
-            "USER 3",
-            "USER 4",
-            "MISSION CHANGE",
-            "BEEPER MUTE",
-            "MULTI FUNCTION"
-        ]);
-    } else { // pre 8.0.0
-        alert("in before v8");
-        FLIGHT_LOG_FLIGHT_MODE_NAME = makeReadOnly([
+            AUTOTUNE_CYCLE_START: 10,
+            AUTOTUNE_CYCLE_RESULT: 11,
+            AUTOTUNE_TARGETS: 12,
+            INFLIGHT_ADJUSTMENT: 13,
+            LOGGING_RESUME: 14,
+
+            GTUNE_CYCLE_RESULT: 20,
+            FLIGHT_MODE: 30, // New Event type
+            TWITCH_TEST: 40, // Feature for latency testing
+            CUSTOM: 250, // Virtual Event Code - Never part of Log File.
+            CUSTOM_BLANK: 251, // Virtual Event Code - Never part of Log File. - No line shown
+            LOG_END: 255
+    }),
+
+    FLIGHT_LOG_FLIGHT_MODE_NAME = makeReadOnly([
             "ARM",
             "ANGLE",
             "HORIZON",
@@ -106,6 +61,9 @@ function setVersionSpecificFieldDefs(version) {
             "CAMERA 1",
             "CAMERA 2",
             "CAMERA 3",  // last item recorded by blackbox
+    ]),
+
+    FLIGHT_LOG_FLIGHT_MODE_NAME_2 = makeReadOnly([
             "OSD ALT1",
             "OSD ALT2",
             "OSD ALT3",
@@ -121,28 +79,38 @@ function setVersionSpecificFieldDefs(version) {
             "NAV CRUISE",
             "AUTOLEVEL",
             "WP PLANNER",
-            "SOARING"
-        ]);
-    }
-}
+            "SOARING",
+            "USER3",
+            "USER4",
+            "CHANGE MISSION",
+            "BEEPER MUTE",
+            "MULTIFUNCTION",
+            "MIXER PROFILE",
+            "MIXER TRANSITION",
+            "ANGLEHOLD",
+    ]),
 
-var
-    FlightLogEvent = makeReadOnly({
-            SYNC_BEEP: 0,
-
-            AUTOTUNE_CYCLE_START: 10,
-            AUTOTUNE_CYCLE_RESULT: 11,
-            AUTOTUNE_TARGETS: 12,
-            INFLIGHT_ADJUSTMENT: 13,
-            LOGGING_RESUME: 14,
-
-            GTUNE_CYCLE_RESULT: 20,
-            FLIGHT_MODE: 30, // New Event type
-            TWITCH_TEST: 40, // Feature for latency testing
-            CUSTOM: 250, // Virtual Event Code - Never part of Log File.
-            CUSTOM_BLANK: 251, // Virtual Event Code - Never part of Log File. - No line shown
-            LOG_END: 255
-    }),
+    FLIGHT_LOG_ACTIVE_FLIGHT_MODE_NAME = makeReadOnly([
+            "ANGLE",
+            "HORIZON",
+            "HEADING HOLD",
+            "ALTHOLD",
+            "RTH",
+            "POSHOLD",
+            "HEADFREE",
+            "FW LAUNCH",
+            "FW MANUAL",
+            "FAILSAFE",
+            "AUTO TUNE",
+            "WAYPOINT",
+            "COURSE HOLD",
+            "FLAPERON",
+            "TURN_ASSISTANT",
+            "TURTLE",
+            "SOARING",
+            "ANGLEHOLD",
+            "FW AUTOLAND",
+    ]),
 
     // Add a general axis index.
     AXIS = makeReadOnly({
@@ -411,3 +379,5 @@ var
             "ADJUSTING_ALTITUDE",
             "ADJUSTING_HEADING"
     ]);
+
+

@@ -639,8 +639,6 @@ function BlackboxLogViewer() {
                 (hasAnalyserFullscreen)?html.addClass("has-analyser-fullscreen"):html.removeClass("has-analyser-fullscreen");
                 graph.setAnalyser(hasAnalyserFullscreen);
             }
-
-            setVersionSpecificFieldDefs(flightLog.getSysConfig().firmware);
         };
 
         reader.readAsArrayBuffer(file);
