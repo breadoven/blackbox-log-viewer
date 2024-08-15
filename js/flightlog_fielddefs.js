@@ -1,13 +1,13 @@
 "use strict";
 
 function makeReadOnly(x) {
-        // Make read-only if browser supports it:
-        if (Object.freeze) {
-                return Object.freeze(x);
-        }
+    // Make read-only if browser supports it:
+    if (Object.freeze) {
+            return Object.freeze(x);
+    }
 
-        // Otherwise a no-op
-        return x;
+    // Otherwise a no-op
+    return x;
 }
 
 var
@@ -26,6 +26,13 @@ var
             CUSTOM: 250, // Virtual Event Code - Never part of Log File.
             CUSTOM_BLANK: 251, // Virtual Event Code - Never part of Log File. - No line shown
             LOG_END: 255
+    }),
+
+    // Add a general axis index.
+    AXIS = makeReadOnly({
+            ROLL: 0,
+            PITCH: 1,
+            YAW: 2
     }),
 
     FLIGHT_LOG_FLIGHT_MODE_NAME = makeReadOnly([
@@ -60,7 +67,7 @@ var
             "AUTO TUNE",
             "CAMERA 1",
             "CAMERA 2",
-            "CAMERA 3",  // last item recorded by blackbox
+            "CAMERA 3",
     ]),
 
     FLIGHT_LOG_FLIGHT_MODE_NAME_2 = makeReadOnly([
@@ -71,9 +78,9 @@ var
             "MC BRAKING",
             "USER 1",
             "USER 2",
-            "FPV ANGLE MIX", // FPV Angle Mix
-            "LOITER CHANGE", // Loiter direction change
-            "MSP RC OVERRIDE", // MSP RC Override
+            "FPV ANGLE MIX",
+            "LOITER CHANGE",
+            "MSP RC OVERRIDE",
             "PREARM",
             "TURTLE",
             "NAV CRUISE",
@@ -111,13 +118,6 @@ var
             "ANGLEHOLD",
             "FW AUTOLAND",
     ]),
-
-    // Add a general axis index.
-    AXIS = makeReadOnly({
-            ROLL: 0,
-            PITCH: 1,
-            YAW: 2
-    }),
 
     PID_CONTROLLER_TYPE = ([
             'UNUSED',
@@ -354,18 +354,7 @@ var
             "CRUISE_3D_ADJUSTING",
             "WAYPOINT_HOLD",
             "RTH_HOVER_ABOVE_HOME",
-            "UNUSED_4",
-            "RTH_TRACKBACK",
-            "MIXERAT_INITIALIZE",
-            "MIXERAT_IN_PROGRESS",
-            "MIXERAT_ABORT",
-            "FW_LANDING_CLIMB_TO_LOITER",
-            "FW_LANDING_LOITER",
-            "FW_LANDING_APPROACH",
-            "FW_LANDING_GLIDE",
-            "FW_LANDING_FLARE",
-            "FW_LANDING_ABORT",
-            "FW_LANDING_FINISHED"
+            "UNUSED_4"
     ]),
 
     FLIGHT_LOG_NAV_FLAGS = makeReadOnly([
@@ -379,5 +368,3 @@ var
             "ADJUSTING_ALTITUDE",
             "ADJUSTING_HEADING"
     ]);
-
-
